@@ -4,15 +4,14 @@ phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      - aws --version
       - $(aws ecr get-login- --region eu-west-2)
   build:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - docker build -f ./Dockerfile -t 713999166442.dkr.ecr.eu-west-2.amazonaws.com/davids-pet-app:latest .
+      - docker build -f ./Dockerfile -t 713999166442.dkr.ecr.eu-west-2.amazonaws.com/davids-pet-app .
       - docker tag davids-pet-app:portupdate 713999166442.dkr.ecr.eu-west-2.amazonaws.com/davids-pet-app:portupdate
   post_build:
     commands:
       - echo Build completed on `date`
-      - docker push 713999166442.dkr.ecr.eu-west-2.amazonaws.com/davids-pet-app:latest
+      - docker push 713999166442.dkr.ecr.eu-west-2.amazonaws.com/davids-pet-app
