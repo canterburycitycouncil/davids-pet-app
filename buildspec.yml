@@ -5,15 +5,17 @@ phases:
     commands:
       - echo Logging in to Amazon ECR...
       - aws --version
-      - echo $AWS_DEFAULT_REGION
-      - $(aws ecr get-login --region eu-west-2)
+      - aws ecr get-login --region eu-west-2 | docker login --username AWS --password-stdin 713999166442.dkr.ecr.eu-west-2.amazonaws.com
+      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - IMAGE_TAG=${COMMIT_HASH:=latest}
   build:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - docker build -f ./Dockerfile -t 713999166442.dkr.ecr.eu-west-2.amazonaws.com/davids-pet-app .
-      - docker tag davids-pet-app:portupdate 713999166442.dkr.ecr.eu-west-2.amazonaws.com/davids-pet-app:portupdate
+      - docker build -t 713999166442.dkr.ecr.eu-west-2.amazonaws.com/davids-pet-app:latest .
+      - docker tag 713999166442.dkr.ecr.eu-west-2.amazonaws.com/davids-pet-app:latest 713999166442.dkr.ecr.eu-west-2.amazonaws.com/davids-pet-app:$IMAGE_TAG
   post_build:
     commands:
       - echo Build completed on `date`
-      - docker push 713999166442.dkr.ecr.eu-west-2.amazonaws.com/davids-pet-app
+      - docker push 713999166442.dkr.ecr.eu-west-2.amazonaws.com/davids-pet-app:latest
+      - docker push 713999166442.dkr.ecr.eu-west-2.amazonaws.com/davids-pet-app:$IMAGE_TAG
