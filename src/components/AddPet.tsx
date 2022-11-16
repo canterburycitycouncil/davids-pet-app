@@ -13,7 +13,7 @@ function addPet(event) {
     })
 
 
-    const url = `http://localhost:3003/local/pets`;
+    const url = `https://km8x5d64ke.execute-api.eu-west-2.amazonaws.com/dev/pets`;
     fetch(url, {
     method: "POST",
     headers: {

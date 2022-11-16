@@ -13,7 +13,7 @@ export class ListPets extends React.Component {
     getAllPets() {
         // {REST_ENDPOINT/get-all}
         
-        fetch (`http://localhost:3003/local/pets/get-all`, {
+        fetch (`https://km8x5d64ke.execute-api.eu-west-2.amazonaws.com/dev/pets/get-all`, {
            method: "GET",
            mode: 'cors'
        })
@@ -43,7 +43,7 @@ export class ListPets extends React.Component {
 
         // {REST_ENDPOINT/id}
 
-        fetch (`http://localhost:3003/local/pets/${id}`, {
+        fetch (`https://km8x5d64ke.execute-api.eu-west-2.amazonaws.com/dev/pets/${id}`, {
            method: "PATCH",
            headers: {
             "Content-Type": "application/json",
@@ -66,7 +66,7 @@ export class ListPets extends React.Component {
 
         // {REST_ENDPOINT/id}
 
-        fetch (`http://localhost:3003/local/pets/${id}`, {
+        fetch (`https://km8x5d64ke.execute-api.eu-west-2.amazonaws.com/dev/pets/${id}`, {
            method: "DELETE",
            headers: {
             "Content-Type": "application/json",
