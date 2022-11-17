@@ -14,7 +14,7 @@ phases:
       - echo Building the Docker image...
       - docker build -t 713999166442.dkr.ecr.eu-west-2.amazonaws.com/davids-pet-app:latest .
       - docker tag 713999166442.dkr.ecr.eu-west-2.amazonaws.com/davids-pet-app:latest 713999166442.dkr.ecr.eu-west-2.amazonaws.com/davids-pet-app:$IMAGE_TAG
-  post-build:
+  post_build:
     commands:
       - echo Build completed on `date`
       - docker push 713999166442.dkr.ecr.eu-west-2.amazonaws.com/davids-pet-app:latest
