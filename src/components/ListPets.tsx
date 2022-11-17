@@ -92,7 +92,7 @@ export class ListPets extends React.Component {
         return (
             <div>
                 <div>
-                    <h2>All of the pretty pets:</h2>
+                    <h2>All of the pretty and lovely pets:</h2>
                 </div>
                 {this.state.pets && this.state.pets.map( (pet) => {
                     console.log('PET DATA:', pet)
