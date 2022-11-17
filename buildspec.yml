@@ -1,14 +1,11 @@
-version: 0.2
+version: 0.1
 
 phases:
-  install:
-    commands:
-      - npm install
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
       - aws --version
-      - aws ecr get-login --region eu-west-2 | docker login --username AWS --password-stdin 713999166442.dkr.ecr.eu-west-2.amazonaws.com
+      - $(aws ecr get-login --region eu-west-2)
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=${COMMIT_HASH:=latest}
   build:
@@ -17,7 +14,7 @@ phases:
       - echo Building the Docker image...
       - docker build -t 713999166442.dkr.ecr.eu-west-2.amazonaws.com/davids-pet-app:latest .
       - docker tag 713999166442.dkr.ecr.eu-west-2.amazonaws.com/davids-pet-app:latest 713999166442.dkr.ecr.eu-west-2.amazonaws.com/davids-pet-app:$IMAGE_TAG
-  post_build:
+  post-build:
     commands:
       - echo Build completed on `date`
       - docker push 713999166442.dkr.ecr.eu-west-2.amazonaws.com/davids-pet-app:latest
