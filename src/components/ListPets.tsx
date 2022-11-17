@@ -91,26 +91,26 @@ export class ListPets extends React.Component {
 
         return (
             <div>
-                <div><h2>All the pets:</h2></div>
-
-                    {this.state.pets && this.state.pets.map( (pet) => {
-                        console.log('PET DATA:', pet)
-                        return (
-                            <div>
-                                <span>PET: {pet.petType}</span><br />
-                                <span>NAME: {pet.name}</span>
-                                <form onSubmit={(event) => this.updatePet(event, pet.uuid)}>
-                                    <label>Update pet type:</label>
-                                    <input type="text" />
-                                    <button type="submit">Update Pet Type</button>
-                                </form>
-                                <form onSubmit={(event) => this.deletePet(event, pet.uuid, pet.petType)}>
-                                    <button type="submit">Delete Pet</button>
-                                </form>
-                            </div>
-                        )
-                    })}
-
+                <div>
+                    <h2>All of the pretty pets:</h2>
+                </div>
+                {this.state.pets && this.state.pets.map( (pet) => {
+                    console.log('PET DATA:', pet)
+                    return (
+                        <div>
+                            <span>PET: {pet.petType}</span><br />
+                            <span>NAME: {pet.name}</span>
+                            <form onSubmit={(event) => this.updatePet(event, pet.uuid)}>
+                                <label>Update pet type:</label>
+                                <input type="text" />
+                                <button type="submit">Update Pet Type</button>
+                            </form>
+                            <form onSubmit={(event) => this.deletePet(event, pet.uuid, pet.petType)}>
+                                <button type="submit">Delete Pet</button>
+                            </form>
+                        </div>
+                    )
+                })}
             </div>
         )
     }
